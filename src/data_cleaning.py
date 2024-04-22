@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+
 class DataStrategy(ABC):
     """
     Abstract class defining strategy for handling data
@@ -14,6 +15,7 @@ class DataStrategy(ABC):
     @abstractmethod
     def handle_data(self, data: pd.DataFrame) -> Union[pd.DataFrame, pd.Series]:
         pass
+
 
 class DataPreProcessStrategy(DataStrategy):
     """
@@ -33,11 +35,20 @@ class DataPreProcessStrategy(DataStrategy):
                     "order_estimated_delivery_date",
                     "order_purchase_timestamp",
                 ],
-                axis=1)
-            data["product_weight_g"].fillna(data["product_weight_g"].median(), inplace=True)
-            data["product_length_cm"].fillna(data["product_length_cm"].median(), inplace=True)
-            data["product_height_cm"].fillna(data["product_height_cm"].median(), inplace=True)
-            data["product_width_cm"].fillna(data["product_width_cm"].median(), inplace=True)
+                axis=1,
+            )
+            data["product_weight_g"].fillna(
+                data["product_weight_g"].median(), inplace=True
+            )
+            data["product_length_cm"].fillna(
+                data["product_length_cm"].median(), inplace=True
+            )
+            data["product_height_cm"].fillna(
+                data["product_height_cm"].median(), inplace=True
+            )
+            data["product_width_cm"].fillna(
+                data["product_width_cm"].median(), inplace=True
+            )
             # write "No review" in review_comment_message column
             data["review_comment_message"].fillna("No review", inplace=True)
 
@@ -89,7 +100,8 @@ class DataCleaning:
         except Exception as e:
             logging.error("Error in handling data: {}".format(e))
             raise e
-        
+
+
 # if __name__ == "__main__":
 #     data = pd.read_csv("../data/olist_customers_dataset.csv")
 #     data_cleaning = DataCleaning(data, DataPreProcessStrategy())

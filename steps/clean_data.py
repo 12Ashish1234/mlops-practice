@@ -6,6 +6,7 @@ from src.data_cleaning import DataCleaning, DataDivideStrategy, DataPreProcessSt
 from typing_extensions import Annotated
 from typing import Tuple
 
+
 @step
 def clean_df(df: pd.DataFrame) -> Tuple[
     Annotated[pd.DataFrame, "X_train"],
@@ -15,10 +16,10 @@ def clean_df(df: pd.DataFrame) -> Tuple[
 ]:
     """
     Cleans the data and divides it into train and test
-    
+
     Args:
         df: Raw data
-    
+
     Returns:
         X_train: Training data
         X_test: Testing data
