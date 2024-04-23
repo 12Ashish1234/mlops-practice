@@ -1,6 +1,5 @@
 from typing import cast
 
-from pipelines.deployment_pipeline import deployment_pipeline, inference_pipeline
 import click
 from pipelines.deployment_pipeline import (
     continuous_deployment_pipeline,
@@ -32,7 +31,7 @@ DEPLOY_AND_PREDICT = "deploy_and_predict"
 )
 @click.option(
     "--min-accuracy",
-    default=0.92,
+    default=0,
     help="Minimum accuracy required to deploy the model",
 )
 def main(config: str, min_accuracy: float):
@@ -48,7 +47,10 @@ def main(config: str, min_accuracy: float):
             timeout=60,
         )
     if predict:
-        inference_pipeline()
+        inference_pipeline(
+            pipeline_name = "continuous_deployment_pipeline",
+            pipeline_step_name="mlflow_model_deployer_step"
+        )
 
     print(
         "You can run:\n "

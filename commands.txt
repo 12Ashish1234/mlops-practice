@@ -1,1 +1,5 @@
 mlflow ui --backend-store-uri "file:/home/ashish/.config/zenml/local_stores/5353ab1e-3f08-46a5-bf5e-9d70c34a8fb4/mlruns"
+
+python3 run_deployment.py --config deploy
+
+python3 run_deployment.py --config predict
