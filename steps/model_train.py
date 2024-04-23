@@ -2,6 +2,8 @@ import logging
 import pandas as pd
 
 from zenml import step
+from zenml.client import Client
+import mlflow
 
 from src.model_dev import LinearRegressionModel
 from sklearn.base import RegressorMixin
