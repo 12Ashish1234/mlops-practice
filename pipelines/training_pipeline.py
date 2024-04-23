@@ -5,12 +5,14 @@ from steps.model_train import train_model
 from steps.evaluation import evaluate_model
 
 
-@pipeline
-def training_pipeline(data_path: str):
+@pipeline(enable_cache=True)
+def train_pipeline(data_path: str):
     """
     This is the pipeline method which describes which steps to perform in sequence
     """
     df = ingest_df(data_path)
-    clean_df(df)
-    train_model(df)
-    evaluate_model(df)
+    X_train, X_test, y_train, y_test = clean_df(df)
+    model = train_model(X_train, X_test, y_train, y_test)
+    r2_score, mse = evaluate_model(model, X_test, y_test)
+
+    print("LOG: results: ", r2_score, mse)

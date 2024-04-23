@@ -27,10 +27,10 @@ def train_model(
     try:
         model = None
         if config.model_name == "LinearRegression":
-            model = LinearRegressionModel().train(X_train, y_train)
-            trained_model = model.train(X_train, y_train)
+            trained_model = LinearRegressionModel().train(X_train, y_train)
             return trained_model
         else:
+            # trained_model = model.train(X_train, y_train)
             raise ValueError("Model {} not supported".format(config.model_name))
     except Exception as e:
         logging.error("Error in training model: {}".format(e))

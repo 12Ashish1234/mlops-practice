@@ -11,8 +11,8 @@ from typing import Tuple
 def clean_df(df: pd.DataFrame) -> Tuple[
     Annotated[pd.DataFrame, "X_train"],
     Annotated[pd.DataFrame, "X_test"],
-    Annotated[pd.DataFrame, "y_train"],
-    Annotated[pd.DataFrame, "y_test"],
+    Annotated[pd.Series, "y_train"],
+    Annotated[pd.Series, "y_test"],
 ]:
     """
     Cleans the data and divides it into train and test
@@ -35,7 +35,11 @@ def clean_df(df: pd.DataFrame) -> Tuple[
         data_cleaning = DataCleaning(processed_data, divide_strategy)
         X_train, X_test, y_train, y_test = data_cleaning.handle_data()
         logging.info("Data cleaning completed")
+        logging.info("Data type of X_train: {}".format(type(X_train)))
+        logging.info("Data type of X_test: {}".format(type(X_test)))
+        logging.info("Data type of y_train: {}".format(type(y_train)))
+        logging.info("Data type of y_test: {}".format(type(y_test)))
         return X_train, X_test, y_train, y_test
     except Exception as e:
-        logging.error("Error in cleaning data: {}".formate(e))
+        logging.error("Error in cleaning data: {}".format(e))
         raise e
